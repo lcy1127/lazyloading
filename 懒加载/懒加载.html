@@ -1,0 +1,121 @@
+<!--
+ * @Author: lcy1127 2514648448@qq.com
+ * @Date: 2023-02-24 17:27:46
+ * @LastEditors: lcy1127 2514648448@qq.com
+ * @LastEditTime: 2023-02-24 20:18:07
+ * @FilePath: \VSqianduan\code\js-code\JS案例\懒加载.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height: 100%;
+        }
+        ul li{
+            overflow: hidden;
+            height: 150px
+        }
+        ul li img{
+            float: left;
+            width: 80px;        
+        }
+    </style>
+</head>
+<body> 
+    <h1>热映</h1>
+    <ul id="list">
+        
+    </ul>
+
+    <script>
+        arr1=[{
+            name:"毒舌律师",
+            url:"pic/p1.png"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+        },{
+            name:"蚁人与黄蜂女：量子狂潮",
+            url:"pic/p2.png"
+        },{
+            name:"流浪地球2",
+            url:"pic/p3.png"
+        },{
+            name:"满江红",
+            url:"pic/p4.png"
+        },{
+            name:"深海",
+            url:"pic/p5.png"
+        }]
+        arr2=[{
+            name:"熊出没·伴我“熊芯”",
+            url:"pic/p6.png"
+        },{
+            name:"中国乒乓之绝地反击",
+            url:"pic/p7.png"
+        },{
+            name:"断网",
+            url:"pic/p8.png"
+        },{
+            name:"无名",
+            url:"pic/p9.png"
+        },{
+            name:"回廊亭",
+            url:"pic/p10.png"
+        }]
+
+        readHTML(arr1)
+
+        function readHTML(arr){
+          list.innerHTML+=arr.map(function(item){
+            return `<li>
+            <img src="${item.url}" alt="">
+            <h3>${item.name}</h3>        
+        </li>`
+          }).join("")
+        }
+  
+
+        //ul的高度
+        var ulHeight=list.offsetHeight
+           //整个窗口的高度
+
+        var windowHeight=document.documentElement.clientHeight
+        // console.log(windowHeight)
+
+        window.onscroll=function(){
+        //ul距离顶部的偏移量
+        var ulTop=list.offsetTop
+
+        // console.log(ulTop+ulHeight)
+        //滚动条滚出的距离 
+         var scrollTop=document.documentElement.scrollTop 
+
+        //  console.log(scrollTop,windowHeight)
+         var h1=ulHeight+ulTop
+        var h2=scrollTop+windowHeight
+        if(h1==h2)
+        {
+          console.log("到底了")
+          //渲染下一页数据
+          //模拟网络延时
+          setTimeout(function(){
+            readHTML(arr2)
+          },1000)
+                 
+        }
+
+        }
+       
+    
+        
+    </script>
+</body>
+</html>
